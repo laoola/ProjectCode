@@ -1,0 +1,37 @@
+[
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/CArp.cpp.o -c /home/zwh/project/PcapPack/CArp.cpp",
+  "file": "/home/zwh/project/PcapPack/CArp.cpp"
+},
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/CCheckIpInfo.cpp.o -c /home/zwh/project/PcapPack/CCheckIpInfo.cpp",
+  "file": "/home/zwh/project/PcapPack/CCheckIpInfo.cpp"
+},
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/CCheckNetCardPacket.cpp.o -c /home/zwh/project/PcapPack/CCheckNetCardPacket.cpp",
+  "file": "/home/zwh/project/PcapPack/CCheckNetCardPacket.cpp"
+},
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/CDealArpOpt.cpp.o -c /home/zwh/project/PcapPack/CDealArpOpt.cpp",
+  "file": "/home/zwh/project/PcapPack/CDealArpOpt.cpp"
+},
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/CPackAnalyse.cpp.o -c /home/zwh/project/PcapPack/CPackAnalyse.cpp",
+  "file": "/home/zwh/project/PcapPack/CPackAnalyse.cpp"
+},
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/main.cpp.o -c /home/zwh/project/PcapPack/main.cpp",
+  "file": "/home/zwh/project/PcapPack/main.cpp"
+},
+{
+  "directory": "/home/zwh/project/PcapPack/build",
+  "command": "/bin/c++   -I/home/zwh/project/PcapPack/.  -g   -o CMakeFiles/pcappack.dir/pcap_interface.cpp.o -c /home/zwh/project/PcapPack/pcap_interface.cpp",
+  "file": "/home/zwh/project/PcapPack/pcap_interface.cpp"
+}
+]
