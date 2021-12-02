@@ -44,129 +44,127 @@ void MainWindow::CreateSignal()
 //将要检测的图片路径
 #define source_pix_addr "/home/zwh/File/check.jpg"
 
-void MainWindow::opencv_face(QImage qImage)
-{
-    QTime time;
-    time.start();
+//void MainWindow::opencv_face(QImage qImage)
+//{
+//    QTime time;
+//    time.start();
 
-    static CvMemStorage* storage = NULL;
-    static CvHaarClassifierCascade* cascade = NULL;
-    const char*cascade_name =source_xml_addr;
-    //加载分类器
-    cascade = (CvHaarClassifierCascade*)cvLoad( cascade_name, 0, 0, 0 );
-    if( !cascade )
-    {
-        qDebug("分类器加载错误.\n");
-        return ;
-    }
+//    static CvMemStorage* storage = NULL;
+//    static CvHaarClassifierCascade* cascade = NULL;
+//    const char*cascade_name =source_xml_addr;
+//    //加载分类器
+//    cascade = (CvHaarClassifierCascade*)cvLoad( cascade_name, 0, 0, 0 );
+//    if( !cascade )
+//    {
+//        qDebug("分类器加载错误.\n");
+//        return ;
+//    }
 
-    //创建内存空间
-    storage = cvCreateMemStorage(0);
+//    //创建内存空间
+//    storage = cvCreateMemStorage(0);
 
-    //加载需要检测的图片
-    //const char* filename =source_pix_addr;
-    //IplImage* img = cvLoadImage(filename, 1 );
-    IplImage* img = QImageToIplImage(&qImage);
+//    //加载需要检测的图片
+//    //const char* filename =source_pix_addr;
+//    //IplImage* img = cvLoadImage(filename, 1 );
+//    IplImage* img = QImageToIplImage(&qImage);
 
-    if(img ==nullptr )
-    {
-        qDebug("图片加载错误.\n");
-        return;
-    }
+//    if(img ==nullptr )
+//    {
+//        qDebug("图片加载错误.\n");
+//        return;
+//    }
 
-    double scale=1.2;
-    static CvScalar colors[] = {
-        {{0,0,255}},{{0,128,255}},{{0,255,255}},{{0,255,0}},
-        {{255,128,0}},{{255,255,0}},{{255,0,0}},{{255,0,255}}
-    };//Just some pretty colors to draw with
-    IplImage* gray = cvCreateImage(cvSize(img->width,img->height),8,1);
-    IplImage* small_img=cvCreateImage(cvSize(cvRound(img->width/scale),cvRound(img->height/scale)),8,1);
-    cvCvtColor(img,gray, CV_BGR2GRAY);
-    cvResize(gray, small_img, CV_INTER_LINEAR);
-    cvEqualizeHist(small_img,small_img); //直方图均衡
-    cvClearMemStorage(storage);
-    double t = (double)cvGetTickCount();
-    CvSeq* objects = cvHaarDetectObjects(small_img,
-                                         cascade,
-                                         storage,
-                                         1.1,
-                                         2,
-                                         0/*CV_HAAR_DO_CANNY_PRUNING*/,
-                                         cvSize(30,30));
-    t = (double)cvGetTickCount() - t;
-    //遍历找到对象和周围画盒
-    for(int i=0;i<(objects->total);++i)
-    {
-        CvRect* r=(CvRect*)cvGetSeqElem(objects,i);
-        cvRectangle(img, cvPoint(r->x*scale,r->y*scale), cvPoint((r->x+r->width)*scale,(r->y+r->height)*scale), colors[i%8]);
-    }
+//    double scale=1.2;
+//    static CvScalar colors[] = {
+//        {{0,0,255}},{{0,128,255}},{{0,255,255}},{{0,255,0}},
+//        {{255,128,0}},{{255,255,0}},{{255,0,0}},{{255,0,255}}
+//    };//Just some pretty colors to draw with
+//    IplImage* gray = cvCreateImage(cvSize(img->width,img->height),8,1);
+//    IplImage* small_img=cvCreateImage(cvSize(cvRound(img->width/scale),cvRound(img->height/scale)),8,1);
+//    cvCvtColor(img,gray, CV_BGR2GRAY);
+//    cvResize(gray, small_img, CV_INTER_LINEAR);
+//    cvEqualizeHist(small_img,small_img); //直方图均衡
+//    cvClearMemStorage(storage);
+//    double t = (double)cvGetTickCount();
+//    CvSeq* objects = cvHaarDetectObjects(small_img,
+//                                         cascade,
+//                                         storage,
+//                                         1.1,
+//                                         2,
+//                                         0/*CV_HAAR_DO_CANNY_PRUNING*/,
+//                                         cvSize(30,30));
+//    t = (double)cvGetTickCount() - t;
+//    //遍历找到对象和周围画盒
+//    for(int i=0;i<(objects->total);++i)
+//    {
+//        CvRect* r=(CvRect*)cvGetSeqElem(objects,i);
+//        cvRectangle(img, cvPoint(r->x*scale,r->y*scale), cvPoint((r->x+r->width)*scale,(r->y+r->height)*scale), colors[i%8]);
+//    }
 
-    for( int i = 0; i < (objects? objects->total : 0); i++ )
-    {
-        CvRect* r = (CvRect*)cvGetSeqElem( objects, i );
-        CvPoint center;
-        int radius;
-        center.x = cvRound((r->x + r->width*0.5)*scale);
-        center.y = cvRound((r->y + r->height*0.5)*scale);
-        radius = cvRound((r->width + r->height)*0.25*scale);
-        cvCircle(img, center, radius, colors[i%8], 3, 8, 0 );
-    }
-    show_face(img);  //显示检测的结果
-    cvReleaseImage(&gray);
-    cvReleaseImage(&small_img);
-    //释放图片
-    cvReleaseImage(&img);
-    qDebug()<<tr("耗时:%1 ms\n").arg(time.elapsed());
-}
+//    for( int i = 0; i < (objects? objects->total : 0); i++ )
+//    {
+//        CvRect* r = (CvRect*)cvGetSeqElem( objects, i );
+//        CvPoint center;
+//        int radius;
+//        center.x = cvRound((r->x + r->width*0.5)*scale);
+//        center.y = cvRound((r->y + r->height*0.5)*scale);
+//        radius = cvRound((r->width + r->height)*0.25*scale);
+//        cvCircle(img, center, radius, colors[i%8], 3, 8, 0 );
+//    }
+//    show_face(img);  //显示检测的结果
+//    cvReleaseImage(&gray);
+//    cvReleaseImage(&small_img);
+//    //释放图片
+//    cvReleaseImage(&img);
+//    qDebug()<<tr("耗时:%1 ms\n").arg(time.elapsed());
+//}
 
-void MainWindow::show_face(IplImage *img)
-{
-    uchar *imgData=(uchar *)img->imageData;
-    QImage  my_image=QImage(imgData,img->width,img->height,QImage::Format_RGB888);
-    my_image=my_image.rgbSwapped(); //BGR格式转RGB
-    QPixmap my_pix; //创建画图类
-    my_pix.convertFromImage(my_image);
-    /*在控件上显示*/
-    ui->label_check->setPixmap(my_pix);
-}
+//void MainWindow::show_face(IplImage *img)
+//{
+//    uchar *imgData=(uchar *)img->imageData;
+//    QImage  my_image=QImage(imgData,img->width,img->height,QImage::Format_RGB888);
+//    my_image=my_image.rgbSwapped(); //BGR格式转RGB
+//    QPixmap my_pix; //创建画图类
+//    my_pix.convertFromImage(my_image);
+//    /*在控件上显示*/
+//    ui->label_check->setPixmap(my_pix);
+//}
 
-IplImage *MainWindow::QImageToIplImage(const QImage *qImage)
-{
-    int width = qImage->width();
-        int height = qImage->height();
-        CvSize Size;
-        Size.height = height;
-        Size.width = width;
-        IplImage *IplImageBuffer = cvCreateImage(Size, IPL_DEPTH_8U, 3);
-        for (int y = 0; y < height; ++y)
-        {
-            for (int x = 0; x < width; ++x)
-            {
-                QRgb rgb = qImage->pixel(x, y);
-                CV_IMAGE_ELEM( IplImageBuffer, uchar, y, x*3+0 ) = qBlue(rgb);
-                CV_IMAGE_ELEM( IplImageBuffer, uchar, y, x*3+1 ) = qGreen(rgb);
-                CV_IMAGE_ELEM( IplImageBuffer, uchar, y, x*3+2 ) = qRed(rgb);
-            }
-         }
-         return IplImageBuffer;
-}
+//IplImage *MainWindow::QImageToIplImage(const QImage *qImage)
+//{
+//    int width = qImage->width();
+//        int height = qImage->height();
+//        CvSize Size;
+//        Size.height = height;
+//        Size.width = width;
+//        IplImage *IplImageBuffer = cvCreateImage(Size, IPL_DEPTH_8U, 3);
+//        for (int y = 0; y < height; ++y)
+//        {
+//            for (int x = 0; x < width; ++x)
+//            {
+//                QRgb rgb = qImage->pixel(x, y);
+//                CV_IMAGE_ELEM( IplImageBuffer, uchar, y, x*3+0 ) = qBlue(rgb);
+//                CV_IMAGE_ELEM( IplImageBuffer, uchar, y, x*3+1 ) = qGreen(rgb);
+//                CV_IMAGE_ELEM( IplImageBuffer, uchar, y, x*3+2 ) = qRed(rgb);
+//            }
+//         }
+//         return IplImageBuffer;
+//}
 
-QImage *MainWindow::IplImageToQImage(IplImage *img)
-{
-    QImage *qmg;
-       uchar *imgData=(uchar *)img->imageData;
-       qmg = new QImage(imgData,img->width,img->height,QImage::Format_RGB888);
-       *qmg=qmg->rgbSwapped(); //BGR格式转RGB
-       return qmg;
-}
+//QImage *MainWindow::IplImageToQImage(IplImage *img)
+//{
+//    QImage *qmg;
+//       uchar *imgData=(uchar *)img->imageData;
+//       qmg = new QImage(imgData,img->width,img->height,QImage::Format_RGB888);
+//       *qmg=qmg->rgbSwapped(); //BGR格式转RGB
+//       return qmg;
+//}
 
 void MainWindow::slot_start_clicked()
 {
     QTime time;
     time.start();
     //构造摄像头对象
-    printf("%s\n", tr("耗时:%1 ms\n").arg(time.elapsed()).toStdString().c_str());
-    QCamera cameraObj;
     printf("%s\n", tr("耗时:%1 ms\n").arg(time.elapsed()).toStdString().c_str());
     ca = new QCamera(ui->comboBox->currentText().toUtf8(),this);
     printf("%s\n", tr("耗时:%1 ms\n").arg(time.elapsed()).toStdString().c_str());
@@ -246,9 +244,9 @@ void MainWindow::show_pic(int id, const QImage &preview)
 
 void MainWindow::slot_TimeOut()
 {
-    QPixmap pixmap(this->size());
+//    QPixmap pixmap(this->size());
 
-    ui->widget_display->render(&pixmap);
-    opencv_face(pixmap.toImage());
+//    ui->widget_display->render(&pixmap);
+//    opencv_face(pixmap.toImage());
 }
 

@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 //opencv include
-#include <opencv/cv.h>
-#include <opencv/cxcore.h>
-#include <opencv/highgui.h>
+//#include <opencv/cv.h>
+//#include <opencv/cxcore.h>
+//#include <opencv/highgui.h>
 
 
 #include <QMainWindow>
@@ -30,10 +30,10 @@ public:
 
     void CreateSignal();
 
-    void opencv_face(QImage qImage);
-    void show_face(IplImage* img);
-    IplImage *QImageToIplImage(const QImage * qImage);
-    QImage *IplImageToQImage(IplImage *img);
+//    void opencv_face(QImage qImage);
+//    void show_face(IplImage* img);
+//    IplImage *QImageToIplImage(const QImage * qImage);
+//    QImage *IplImageToQImage(IplImage *img);
 
 private slots:
     void slot_start_clicked();
