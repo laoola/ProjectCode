@@ -28,7 +28,7 @@ Widget::Widget(QWidget *parent)
     //
     timer.start(100);
     connect(&timer,SIGNAL(timeout()), this, SLOT(update()));
- //   timer.start(100);
+    timer.start(100);
 }
 
 Widget::~Widget()
@@ -350,7 +350,7 @@ void VideoReadThread_0::slotOnProbeFrame(const QVideoFrame &frame)
    }
    else
    {
-       qDebug("当前格式编码为,暂时不支持转换.\n");
+       qDebug("当前格式编码为%1,暂时不支持转换.\n");
    }
     cloneFrame.unmap();
 
@@ -465,7 +465,6 @@ void Widget::on_pushButton_stop_clicked()
 
 void Widget::update()
 {
-    this->repaint();
     if(ui->label_ImageDisplay_0->pixmap())
     opencv_face(ui->label_ImageDisplay_0->pixmap()->toImage());
 }
