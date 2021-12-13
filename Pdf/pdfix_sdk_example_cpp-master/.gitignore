@@ -1,0 +1,11 @@
+bin/
+build/
+output/
+external/pdfix_sdk
+
+.vs/
+.vscode/
+*.user
+
+xcuserdata/
+*.xcworkspace/
