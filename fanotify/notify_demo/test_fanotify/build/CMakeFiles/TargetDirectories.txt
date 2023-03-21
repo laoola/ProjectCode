@@ -1,0 +1,4 @@
+/home/zwh/linux_cems/src_en/dbac/notify_demo/test_fanotify/build/CMakeFiles/rebuild_cache.dir
+/home/zwh/linux_cems/src_en/dbac/notify_demo/test_fanotify/build/CMakeFiles/test_fanotify.dir
+/home/zwh/linux_cems/src_en/dbac/notify_demo/test_fanotify/build/CMakeFiles/edit_cache.dir
+/home/zwh/linux_cems/src_en/dbac/notify_demo/test_fanotify/build/CMakeFiles/test_fanotify_autogen.dir
